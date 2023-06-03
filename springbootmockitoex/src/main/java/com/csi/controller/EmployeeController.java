@@ -10,6 +10,8 @@ import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api")
@@ -50,5 +52,12 @@ public class EmployeeController {
     public ResponseEntity<String> deleteDataById(@PathVariable int empId){
         employeeServiceImpl.deleteDataById(empId);
         return ResponseEntity.ok("Data Deleted Successfully");
+    }
+
+    @GetMapping("/listofemployee")
+    public ResponseEntity<List<Employee>> listOfEmployee(){
+     return ResponseEntity.ok(Stream.of(new Employee(121, "SWARA", 65000, 989898989),
+                new Employee(129, "MD", 95000, 999898989),
+                new Employee(139, "MD", 95000, 999898989)).collect(Collectors.toList()));
     }
 }
